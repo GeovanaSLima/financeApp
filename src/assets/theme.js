@@ -1,0 +1,15 @@
+export const darkTheme = {
+  background: '#121212',
+  surface: '#F5F5F5',
+  primary: '#F6C445',
+  primaryVariant: '##d1a420',
+  secondary: '#00cca3',
+  secondaryVariant: '#009470',
+  textPrimary: '#FFFFFF',
+  textSecondary: '#B3B3B3',
+  placeholder: '#12121260',
+  border: '#333333',
+  error: '#E45F2B',
+  input: '#757575',
+  lightGreen: '#A0E548', 
+};
