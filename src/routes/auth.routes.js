@@ -20,6 +20,15 @@ export default function AuthRoutes() {
 			<AuthStack.Screen 
 				name="SignUp"
 				component={SignUp}
+				options={{
+						headerStyle: {
+						backgroundColor: '#F6C445',
+						borderBottomWidth: 1,
+						borderBottomColor: '#FFF'
+					},
+					headerTitle: 'Voltar',
+					headerBackTitleVisible: false
+				}}
 			/>
 		</AuthStack.Navigator>
 	)
