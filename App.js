@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Routes from './src/routes';
+import AuthProvider from './src/contexts/auth';
 import { darkTheme } from './src/assets/theme';
 
 export default function App() {
@@ -11,9 +12,11 @@ export default function App() {
 
   return (	
 		<ThemeProvider theme={theme}>
-			<NavigationContainer >
-				<StatusBar backgroundColor={theme.background} />
-				<Routes />
+			<NavigationContainer>
+				<AuthProvider>
+					<StatusBar backgroundColor={theme.background} />
+					<Routes />
+				</AuthProvider>
 			</NavigationContainer>
 		</ThemeProvider>
   );
