@@ -28,7 +28,7 @@ export const Input = styled.TextInput`
   border-radius: 8px; 
   color: ${({ theme }) => theme.background}; 
   margin-bottom: 12px;
-  height: 60;
+  height: 60px;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
