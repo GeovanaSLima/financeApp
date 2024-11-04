@@ -25,13 +25,47 @@ function AuthProvider({ children }) {
       navigation.goBack();
       
     } catch(error) {
-      console.log("[ERROR] - Error on signing up user")
+      console.log("[ERROR] - Error on signing up user", error)
+      setLoandingAuth(false);
+    }
+  }
+
+  async function signIn(email, password) {
+    setLoandingAuth(true);
+
+    try {
+      const response = await api.post("/login", {
+        email: email,
+        password: password
+      })
+
+      const { id, name, token } = response.data;
+
+      const data = {
+        id,
+        name,
+        token,
+        email,
+      };
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
+      setUser({
+        id,
+        name,
+        email,
+      })
+
+      setLoandingAuth(false);
+
+    } catch(error) {
+      console.log("[ERROR] - Error on signing in", error)
       setLoandingAuth(false);
     }
   }
 
   return(
-    <AuthContext.Provider value={{ signed: !!user, user, signUp, loadingAuth }}>
+    <AuthContext.Provider value={{ signed: !!user, user, signUp, signIn, loadingAuth }}>
       {children}
     </AuthContext.Provider>
   )
