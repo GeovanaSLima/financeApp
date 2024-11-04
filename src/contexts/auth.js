@@ -5,13 +5,14 @@ import { useNavigation } from "@react-navigation/native";
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
-  const [user, setUser] = useState({
-    nome: 'Geovana'
-  });
+  const [user, setUser] = useState(null);
+  const [loadingAuth, setLoandingAuth] = useState(false);
 
   const navigation = useNavigation();
 
   async function signUp(email, password, name) {
+    setLoandingAuth(true);
+
     try {
       const response = await api.post('/users', {
         name: name,
@@ -19,15 +20,18 @@ function AuthProvider({ children }) {
         password: password
       })
 
+      setLoandingAuth(false);
+
       navigation.goBack();
       
     } catch(error) {
       console.log("[ERROR] - Error on signing up user")
+      setLoandingAuth(false);
     }
   }
 
   return(
-    <AuthContext.Provider value={{ user, signUp }}>
+    <AuthContext.Provider value={{ user, signUp, loadingAuth }}>
       {children}
     </AuthContext.Provider>
   )
