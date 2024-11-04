@@ -20,6 +20,7 @@ export default function SignUp() {
 	const [password, setPassword] = useState("");
 
 	function handleSignUp() {
+		if(name === '' || email === '' || password === '') return;
 		signUp(email, password, name);
 	}
 
