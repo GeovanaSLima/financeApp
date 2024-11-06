@@ -16,9 +16,12 @@ import {
 import { AuthContext } from '../../contexts/auth';
 
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
 
 export default function SignIn() {
+	const theme = useTheme();
 	const navigation = useNavigation();
+
 	const { signIn, loadingAuth } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -41,7 +44,7 @@ export default function SignIn() {
 				<AreaInput>
 					<Input 
 						placeholder="Seu email"
-						placeholderTextColor="#12121260"
+						placeholderTextColor={theme.placeholder}
 						value={email}
 						onChangeText={ (text) => setEmail(text) }
 					/>
@@ -50,7 +53,7 @@ export default function SignIn() {
 				<AreaInput>
 					<Input 
 						placeholder="Sua senha"
-						placeholderTextColor="#12121260"
+						placeholderTextColor={theme.placeholder}
 						value={password}
 						onChangeText={ (text) => setPassword(text) }
 						secureTextEntry={true}
@@ -60,7 +63,7 @@ export default function SignIn() {
 				<SubmitButton activeOpacity={0.9} onPress={handleLogin}>
 					{
 						loadingAuth ? (
-							<ActivityIndicator size={20} color="#FFF" />
+							<ActivityIndicator size={20} color={theme.textPrimary} />
 						) : (
 							<SubmitText>Acessar</SubmitText>
 						)

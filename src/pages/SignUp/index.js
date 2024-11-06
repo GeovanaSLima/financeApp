@@ -10,8 +10,10 @@ import {
 	SubmitButton,
 	SubmitText
  } from "../SignIn/styles";
+import { useTheme } from 'styled-components/native';
 
 export default function SignUp() {
+	const theme = useTheme();
 	
 	const { signUp, loadingAuth } = useContext(AuthContext);
 
@@ -61,7 +63,7 @@ export default function SignUp() {
 
 					{
 						loadingAuth ? (
-							<ActivityIndicator size={20} color="#121212" />
+							<ActivityIndicator size={20} color={theme.background} />
 						) : (
 							<SubmitText>Cadastrar</SubmitText>
 						)
