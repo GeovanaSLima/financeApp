@@ -14,29 +14,28 @@ function AuthProvider({ children }) {
   const navigation = useNavigation();
 
   useEffect(() => {
-    async function loadStorage() {
+    async function loadStorage(){
       const storageUser = await AsyncStorage.getItem('@finToken');
 
-      if (storageUser) {
+      if(storageUser) {
+
         const response = await api.get('/me', {
           headers: {
             'Authorization': `Bearer ${storageUser}`
           }
         })
-        .catch(() => {
+        .catch(()=>{
           setUser(null);
         })
 
-        api.defaults.headers['Authorization'] = `Bearer ${token}`;
-        
+        api.defaults.headers['Authorization'] = `Bearer ${storageUser}`;
         setUser(response.data);
-
         setLoanding(false);
 
       }
 
       setLoanding(false);
-
+      
     }
 
     loadStorage();
@@ -99,7 +98,7 @@ function AuthProvider({ children }) {
   }
 
   return(
-    <AuthContext.Provider value={{ signed: !!user, user, signUp, signIn, loadingAuth }}>
+    <AuthContext.Provider value={{ signed: !!user, user, signUp, signIn, loadingAuth, loading }}>
       {children}
     </AuthContext.Provider>
   )
