@@ -12,10 +12,11 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const Title = styled.Text`
-  font-size: 20px;
-  margin-left: 8px;
-  /* needs fixing */
-  color: ${({ theme }) => theme.primary};
+  font-size: 22px;
+  margin-left: 12px;
+  margin-bottom: 2px;
+  color: ${({ theme }) => theme.textPrimary};
+  font-weight: 600;
 `;
 
 export const ButtonMenu = styled.TouchableOpacity`

@@ -12,7 +12,7 @@ export default function Header({ title }) {
   return(
     <Container>
       <ButtonMenu onPress={ () => navigation.openDrawer() }>
-        <Icon name="menu" size={35} color={theme.textPrimary} />
+        <Icon name="menu" size={30} color={theme.textPrimary} />
       </ButtonMenu>
 
       { title && (
