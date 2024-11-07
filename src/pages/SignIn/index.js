@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { ActivityIndicator, Platform } from 'react-native';
+import { ActivityIndicator, Platform, TouchableWithoutFeedback } from 'react-native';
 
 import { 
 	Background, 
@@ -31,50 +31,52 @@ export default function SignIn() {
 	}
 
 	return(
-		<Background>
-			<Container
-				behavior={Platform.OS === 'ios' ? 'padding' : ''}
-				enabled
-			>
+		<TouchableWithoutFeedback onPress={ () => Keyboard.dismiss() }>
+			<Background>
+				<Container
+					behavior={Platform.OS === 'ios' ? 'padding' : ''}
+					enabled
+				>
 
-				<Logo 
-					source={require('../../assets/img/Logo.png')}
-				/>
-
-				<AreaInput>
-					<Input 
-						placeholder="Seu email"
-						placeholderTextColor={theme.placeholder}
-						value={email}
-						onChangeText={ (text) => setEmail(text) }
+					<Logo 
+						source={require('../../assets/img/Logo.png')}
 					/>
-				</AreaInput>
 
-				<AreaInput>
-					<Input 
-						placeholder="Sua senha"
-						placeholderTextColor={theme.placeholder}
-						value={password}
-						onChangeText={ (text) => setPassword(text) }
-						secureTextEntry={true}
-					/>
-				</AreaInput>
+					<AreaInput>
+						<Input 
+							placeholder="Seu email"
+							placeholderTextColor={theme.placeholder}
+							value={email}
+							onChangeText={ (text) => setEmail(text) }
+						/>
+					</AreaInput>
 
-				<SubmitButton activeOpacity={0.9} onPress={handleLogin}>
-					{
-						loadingAuth ? (
-							<ActivityIndicator size={20} color={theme.textPrimary} />
-						) : (
-							<SubmitText>Acessar</SubmitText>
-						)
-					}
-				</SubmitButton>
+					<AreaInput>
+						<Input 
+							placeholder="Sua senha"
+							placeholderTextColor={theme.placeholder}
+							value={password}
+							onChangeText={ (text) => setPassword(text) }
+							secureTextEntry={true}
+						/>
+					</AreaInput>
 
-				<Link onPress={ () => navigation.navigate('SignUp') }>
-					<LinkText>Criar Conta</LinkText>
-				</Link>
+					<SubmitButton activeOpacity={0.9} onPress={handleLogin}>
+						{
+							loadingAuth ? (
+								<ActivityIndicator size={20} color={theme.textPrimary} />
+							) : (
+								<SubmitText>Acessar</SubmitText>
+							)
+						}
+					</SubmitButton>
 
-			</Container>
-		</Background>
+					<Link onPress={ () => navigation.navigate('SignUp') }>
+						<LinkText>Criar Conta</LinkText>
+					</Link>
+
+				</Container>
+			</Background>
+		</TouchableWithoutFeedback>
 	)
 }
