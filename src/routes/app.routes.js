@@ -37,7 +37,7 @@ function AppRoutes() {
         />
 
         <AppDrawer.Screen
-          name="New Entry"
+          name="Registrar Movimentação"
           component={NewEntry}
         />
         
