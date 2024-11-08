@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Keyboard, SafeAreaView, TouchableWithoutFeedback, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Header from "../../components/Header";
-import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from "react-native";
+import RegisterTypes from "../../components/RegisterTypes";
+import api from "../../services/api";
 
 import { 
   Background,
@@ -9,11 +12,52 @@ import {
   SubmitButton,
   SubmitText 
 } from "./styles";
+import { format } from "date-fns";
 
 export default function NewEntry() {
+  const navigation = useNavigation();
   const [labelInput, setLabelInput] = useState('');
   const [valueInput, setValueInput] = useState('');
   const [type, setType] = useState('receita');
+
+  function handleSubmit() {
+    Keyboard.dismiss();
+
+    if (isNaN(parseFloat(valueInput)) || type === null) {
+      alert('Preencha todos os campos')
+      return;
+    }
+
+    Alert.alert(
+      'Confirmar os Dados do Registro',
+      `Tipo: ${type} - Valor: ${parseFloat(valueInput)}`,
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel'
+        },
+        {
+          text: 'Confirmar',
+          onPress: () => handleAdd()
+        }
+      ]
+    )
+  }
+
+  async function handleAdd() {
+    Keyboard.dismiss();
+
+    await api.post('/receive', {
+      description: labelInput,
+      value: Number(valueInput),
+      type: type,
+      date: format(new Date(), 'dd/MM/yyyy')
+    })
+
+    setLabelInput('');
+    setValueInput('');
+    navigation.navigate('Home');
+  }
 
   return(
     <TouchableWithoutFeedback onPress={ () => Keyboard.dismiss() }>
@@ -35,7 +79,9 @@ export default function NewEntry() {
             onChangeText={ (text) => setValueInput(text) }
           />
 
-          <SubmitButton>
+          <RegisterTypes type={type} sendTypeChanged={ (item) => setType(item) } />
+
+          <SubmitButton onPress={handleSubmit}>
             <SubmitText>Registrar</SubmitText>
           </SubmitButton>
 
