@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from "react-native";
 
 import Header from "../../components/Header";
-import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from "react-native";
+import RegisterTypes from "../../components/RegisterTypes";
 
 import { 
   Background,
@@ -34,6 +35,8 @@ export default function NewEntry() {
             value={valueInput}
             onChangeText={ (text) => setValueInput(text) }
           />
+
+          <RegisterTypes type={type} sendTypeChanged={ (item) => setType(item) } />
 
           <SubmitButton>
             <SubmitText>Registrar</SubmitText>
