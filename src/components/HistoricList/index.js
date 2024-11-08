@@ -1,20 +1,22 @@
 import React, { useState } from "react";
+
 import Icon from 'react-native-vector-icons/Feather';
-import { useTheme } from "styled-components";
+
 import { format } from "date-fns";  
+import { useTheme } from "styled-components";
+import { TouchableWithoutFeedback, Alert } from "react-native";
 
 import { 
   Container, 
   Tipo,
   TypeText, 
   IconView,
-  DateView,
   DateText,
   DescriptionText,
   ValorText
 } from "./styles";
 
-export default function HistoricList({ data }) {
+export default function HistoricList({ data, deleteItem }) {
   const theme = useTheme();
   const [isReceive, setIsReceive] = useState(data.type === 'receita');
 
@@ -24,25 +26,44 @@ export default function HistoricList({ data }) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  function handleDeleteItem() {
+    Alert.alert(
+      'Atenção',
+      'Tem certeza que quer deleter essa movimentação?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Deletar',
+          onPress: () => deleteItem(data.id)
+        }
+      ]
+    )
+  }
+
   return(
-    <Container>
-      <Tipo>
-        <IconView tipo={isReceive}>
-          <Icon 
-            name={ isReceive ? "arrow-up" : "arrow-down" } 
-            size={20} 
-            color={theme.background} 
-          />
-          <TypeText>{data.type}</TypeText>
-        </IconView>
-        
-        <DateText>{formattedDate}</DateText>
-        
-      </Tipo>
+    <TouchableWithoutFeedback onLongPress={handleDeleteItem}>
+      <Container>
+        <Tipo>
+          <IconView tipo={isReceive}>
+            <Icon 
+              name={ isReceive ? "arrow-up" : "arrow-down" } 
+              size={20} 
+              color={theme.background} 
+            />
+            <TypeText>{data.type}</TypeText>
+          </IconView>
+          
+          <DateText>{formattedDate}</DateText>
 
-      <DescriptionText>{capitalize(data.description)}</DescriptionText>
+        </Tipo>
 
-      <ValorText>RS {data.value}</ValorText>
-    </Container>
+        <DescriptionText>{capitalize(data.description)}</DescriptionText>
+
+        <ValorText>R$ {data.value}</ValorText>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
