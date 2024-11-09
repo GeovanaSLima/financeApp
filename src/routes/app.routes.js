@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 import Home from "../pages/Home";
 import NewEntry from "../pages/NewEntry";
 import Profile from "../pages/Profile";
+import Sidebar from "../components/Sidebar";
 
 const AppDrawer = createDrawerNavigator();
 
@@ -16,6 +17,7 @@ function AppRoutes() {
   return(
     <ThemeProvider theme={theme}>
       <AppDrawer.Navigator
+      drawerContent={ (props) => <Sidebar {...props} /> }
         screenOptions={{
           headerShown: false,
 
