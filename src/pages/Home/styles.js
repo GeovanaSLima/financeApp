@@ -9,7 +9,7 @@ export const ListBalance = styled.FlatList`
   max-height: 190px;
   margin-top: 20px;
 `
-export const Area = styled.View`
+export const Area = styled.TouchableOpacity`
   background-color: ${({theme}) => theme.backgroundVariant};
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;

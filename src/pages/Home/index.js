@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { format } from "date-fns";
 import { useTheme } from "styled-components";
 import { useIsFocused } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native";
+import { Modal, TouchableOpacity } from "react-native";
 
 import api from "../../services/api";
 import Header from "../../components/Header";
@@ -17,6 +17,7 @@ import {
   Title,
   List
 } from "./styles";
+import CalendarModal from "../../components/CalendarModal";
 
 export default function Home() {
   const theme = useTheme();
@@ -24,6 +25,7 @@ export default function Home() {
   const isFocused = useIsFocused();
   const [listBalance, setListBalance] = useState([]);
   const [movements, setMovements] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   
   const [dateMovements, setDateMovements] = useState(new Date());
 
@@ -85,10 +87,8 @@ export default function Home() {
         renderItem={ ({ item }) => ( <BalanceItem data={item} /> )}
       />
 
-      <Area>
-        <TouchableOpacity>
-          <Icon name="event" color={theme.surface} size={30} style={{ paddingTop: 6 }} />
-        </TouchableOpacity>
+      <Area onPress={ () => setModalVisible(true) }>
+        <Icon name="event" color={theme.surface} size={30} style={{ paddingTop: 6 }} />
         <Title>Últimas Movimentações</Title>
       </Area>
 
@@ -99,6 +99,11 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
       />
+
+      <Modal visible={modalVisible} animationType="fade" transparent={true}>
+        <CalendarModal setVisible={ () => setModalVisible(false) } />
+      </Modal>
+
     </Background>
   )
 }
