@@ -22,11 +22,11 @@ export const Area = styled.View`
 `
 
 export const Title = styled.Text`
-  margin-left: 5px;
+  margin-left: 10px;
   color: ${({theme}) => theme.surface};
   margin-bottom: 14px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
 `
 
 export const List = styled.FlatList`

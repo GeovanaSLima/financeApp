@@ -87,7 +87,7 @@ export default function Home() {
 
       <Area>
         <TouchableOpacity>
-          <Icon name="event" color={theme.surface} size={30} />
+          <Icon name="event" color={theme.surface} size={30} style={{ paddingTop: 6 }} />
         </TouchableOpacity>
         <Title>Últimas Movimentações</Title>
       </Area>
