@@ -12,9 +12,11 @@ import {
 
 import Header from "../../components/Header";
 import { AuthContext } from "../../contexts/auth";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Profile() {
   const { user, signOut } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   return(
     <Container>
@@ -26,7 +28,7 @@ export default function Profile() {
         { user && user.name}
       </Name>
 
-      <NewLink>
+      <NewLink onPress={() => navigation.navigate('Registrar Movimentação')}>
         <NewText>Nova Movimentação</NewText>
       </NewLink>
 
