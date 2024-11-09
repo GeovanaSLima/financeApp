@@ -3,7 +3,7 @@ export const darkTheme = {
   backgroundVariant: '#101012', 
   surface: '#F5F5F5',
   primary: '#F6C445',
-  primaryVariant: '##d1a420',
+  primaryVariant: '#d1a452',
   secondary: '#00cca3',
   secondaryVariant: '#009470',
   textPrimary: '#FFFFFF',

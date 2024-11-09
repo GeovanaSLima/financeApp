@@ -33,7 +33,11 @@ export default function Home() {
     let isActive = true;
 
     async function getMovements() {
-      let dateFormatted = format(dateMovements, 'dd/MM/yyyy');
+      
+      let date = new Date(dateMovements);
+      let onlyDate = date.valueOf() + date.getTimezoneOffset() * 60 * 1000;
+      
+      let dateFormatted = format(onlyDate, 'dd/MM/yyyy');
 
       const receives = await api.get('/receives', {
         params: {
@@ -59,7 +63,7 @@ export default function Home() {
 
     return () => isActive = false;
 
-  }, [isFocused])
+  }, [isFocused, dateMovements])
 
   async function handleDelete(id) {
     try {
@@ -73,6 +77,11 @@ export default function Home() {
     } catch(error) {
       console.log(error);
     }
+  }
+
+  function filterDateMovements(dateSelected) {
+    console.log(dateSelected);
+    setDateMovements(dateSelected);
   }
 
   return(
@@ -101,7 +110,10 @@ export default function Home() {
       />
 
       <Modal visible={modalVisible} animationType="fade" transparent={true}>
-        <CalendarModal setVisible={ () => setModalVisible(false) } />
+        <CalendarModal 
+          setVisible={ () => setModalVisible(false) } 
+          handleFilter={filterDateMovements}
+        />
       </Modal>
 
     </Background>
