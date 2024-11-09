@@ -1,12 +1,12 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
+import { darkTheme } from "../assets/theme";
 import { ThemeProvider } from "styled-components";
 
 import Home from "../pages/Home";
 import NewEntry from "../pages/NewEntry";
-import { darkTheme } from "../assets/theme";
-
+import Profile from "../pages/Profile";
 
 const AppDrawer = createDrawerNavigator();
 
@@ -40,7 +40,12 @@ function AppRoutes() {
           name="Registrar Movimentação"
           component={NewEntry}
         />
-        
+
+        <AppDrawer.Screen
+          name="Perfil"
+          component={Profile}
+        />
+
       </AppDrawer.Navigator>
     </ThemeProvider>
   )
